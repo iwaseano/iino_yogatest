@@ -37,7 +37,7 @@ jobs:
           action: "upload"
           app_location: "./src"
           api_location: ""
-          output_location: ""
+          output_location: "./src"
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
