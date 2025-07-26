@@ -6,7 +6,7 @@ import logging
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional, Any
 from dataclasses import dataclass, asdict
-from pydantic import BaseModel, EmailStr, validator
+from pydantic import BaseModel, EmailStr, field_validator
 import pytz
 
 
@@ -21,14 +21,16 @@ class ReservationRequest(BaseModel):
     phone: str
     notes: Optional[str] = ""
     
-    @validator('class_type')
+    @field_validator('class_type')
+    @classmethod
     def validate_class_type(cls, v):
         allowed_types = ['hatha', 'power', 'restorative']
         if v not in allowed_types:
             raise ValueError(f'Class type must be one of: {allowed_types}')
         return v
     
-    @validator('date')
+    @field_validator('date')
+    @classmethod
     def validate_date(cls, v):
         try:
             # 日付の形式チェック
@@ -50,7 +52,8 @@ class ReservationRequest(BaseModel):
                 raise ValueError('Date must be in YYYY-MM-DD format')
             raise e
     
-    @validator('name')
+    @field_validator('name')
+    @classmethod
     def validate_name(cls, v):
         if not v or not v.strip():
             raise ValueError('Name is required')
@@ -58,7 +61,8 @@ class ReservationRequest(BaseModel):
             raise ValueError('Name must be at least 2 characters')
         return v.strip()
     
-    @validator('phone')
+    @field_validator('phone')
+    @classmethod
     def validate_phone(cls, v):
         if not v or not v.strip():
             raise ValueError('Phone number is required')
