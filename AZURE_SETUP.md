@@ -1,5 +1,29 @@
 # Azure Static Web Apps セットアップガイド
 
+## 🚀 クイックスタート
+
+### オプション1: 自動セットアップスクリプト（推奨）
+
+1. **PowerShell スクリプトを実行**:
+   ```powershell
+   # このリポジトリのルートディレクトリで実行
+   .\setup-azure-swa.ps1
+   ```
+
+2. **GitHub の認証**: スクリプトがGitHub認証を要求した場合、ブラウザで認証を完了
+
+3. **デプロイトークンをコピー**: スクリプトが表示するデプロイトークンをメモ
+
+4. **GitHub Secrets に設定**:
+   - GitHub リポジトリ → Settings → Secrets and variables → Actions
+   - "New repository secret" をクリック
+   - Name: `AZURE_STATIC_WEB_APPS_API_TOKEN_LIVELY_WATER_000D5A100`
+   - Secret: コピーしたデプロイトークン
+
+5. **ワークフローを有効化**: `.github/workflows/azure-static-web-apps-lively-water-000d5a100.yml` のコメントアウトされた `on:` セクションを有効化
+
+### オプション2: Azure Portal での手動作成
+
 ## 前提条件
 - Azure アカウント
 - GitHub アカウント
