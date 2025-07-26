@@ -1,0 +1,107 @@
+trigger:
+- main
+
+pool:
+  vmIma    - task: PublishBuildArtifacts@1
+      displayName: 'Publish artifacts'
+      inputs:
+        pathToPublish: 'src'
+        artifactName: 'static-web-app'
+        publishLocation: 'Container'buntu-latest'
+
+variables:
+  nodeVersion: '18.x'
+
+stages:
+- stage: Build
+  displayName: 'Build Stage'
+  jobs:
+  - job: Build
+    displayName: 'Build Job'
+    steps:
+    - task: NodeTool@0
+      displayName: 'Use Node.js $(nodeVersion)'
+      inputs:
+        versionSpec: '$(nodeVersion)'
+
+    - task: Npm@1
+      displayName: 'npm install'
+      inputs:
+        command: 'install'
+        workingDir: '$(Build.SourcesDirectory)'
+
+    - task: Npm@1
+      displayName: 'npm run build'
+      inputs:
+        command: 'custom'
+        customCommand: 'run build'
+        workingDir: '$(Build.SourcesDirectory)'
+
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish build artifacts'
+      inputs:
+        PathtoPublish: '$(Build.SourcesDirectory)/dist'
+        ArtifactName: 'static-web-app'
+        publishLocation: 'Container'
+
+- stage: Deploy
+  displayName: 'Deploy Stage'
+  dependsOn: Build
+  condition: succeeded()
+  jobs:
+  - deployment: Deploy
+    displayName: 'Deploy to Azure Static Web Apps'
+    environment: 'production'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: DownloadBuildArtifacts@0
+            displayName: 'Download build artifacts'
+            inputs:
+              buildType: 'current'
+              downloadType: 'single'
+              artifactName: 'static-web-app'
+              downloadPath: '$(System.ArtifactsDirectory)'
+
+          - task: AzureStaticWebApp@0
+            displayName: 'Deploy to Azure Static Web Apps'
+            inputs:
+              app_location: '$(System.ArtifactsDirectory)/static-web-app'
+              output_location: ''
+              azure_static_web_apps_api_token: '$(AZURE_STATIC_WEB_APPS_API_TOKEN)'
+              skip_app_build: true
+
+# 代替案: GitHub Actions スタイルの設定
+# もし上記のタスクが利用できない場合は、以下の設定も可能です
+
+- stage: DeployAlternative
+  displayName: 'Deploy Stage (Alternative)'
+  dependsOn: Build
+  condition: false # 通常は無効化、必要に応じて有効化
+  jobs:
+  - job: DeployJob
+    displayName: 'Deploy Job'
+    steps:
+    - task: NodeTool@0
+      displayName: 'Use Node.js $(nodeVersion)'
+      inputs:
+        versionSpec: '$(nodeVersion)'
+
+    - checkout: self
+      submodules: true
+
+    - script: |
+        npm install -g @azure/static-web-apps-cli
+      displayName: 'Install SWA CLI'
+
+    - script: |
+        npm install
+        npm run build
+      displayName: 'Build application'
+
+    - script: |
+        swa deploy ./src --deployment-token $(AZURE_STATIC_WEB_APPS_API_TOKEN)
+      displayName: 'Deploy to Azure Static Web Apps'
+      env:
+        AZURE_STATIC_WEB_APPS_API_TOKEN: $(AZURE_STATIC_WEB_APPS_API_TOKEN)
