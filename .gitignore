@@ -39,6 +39,7 @@ swa-cli.config.json
 # Azure Functions
 api/local.settings.json
 api/.venv/
+api/venv/
 api/__pycache__/
 api/.python_packages/
 api/.azure-functions-worker-requirements/
