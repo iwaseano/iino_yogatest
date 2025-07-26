@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Serenity Yoga Studio - 心と体のバランスを整えるヨガスタジオ。初心者から上級者まで、様々なクラスをご用意。オンライン予約システムで簡単予約。">
+    <meta name="keywords" content="ヨガ, ヨガスタジオ, ヨガクラス, 予約, 渋谷, 代官山, ハタヨガ, パワーヨガ, リストラティブヨガ, マインドフルネス">
+    <meta name="author" content="Serenity Yoga Studio">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Serenity Yoga Studio - あなたの心と体のバランスを整える">
+    <meta property="og:description" content="心と体のバランスを整えるヨガスタジオ。経験豊富なインストラクターによる質の高いレッスンを提供。">
+    <meta property="og:image" content="/images/og-image.jpg">
+    <meta property="og:url" content="https://serenity-yoga.azurestaticapps.net">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="ja_JP">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Serenity Yoga Studio">
+    <meta name="twitter:description" content="心と体のバランスを整えるヨガスタジオ">
+    <meta name="twitter:image" content="/images/twitter-card.jpg">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#6b8e7f">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Serenity Yoga">
+    <link rel="apple-touch-icon" href="/images/icon-192x192.png">
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="/manifest.json">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+    
+    <title>Serenity Yoga Studio - あなたの心と体のバランスを整える</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Dancing+Script:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- ナビゲーション -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <h2>Serenity Yoga</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#home" class="nav-link">ホーム</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#about" class="nav-link">当スタジオについて</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#classes" class="nav-link">クラス</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#instructors" class="nav-link">インストラクター</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#pricing" class="nav-link">料金</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">お問い合わせ</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link" id="myReservationsLink">予約確認</a>
+                </li>
+            </ul>
+            <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ヒーローセクション -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">心と体のバランスを<br><span class="accent">整える</span>ヨガスタジオ</h1>
+            <p class="hero-subtitle">あなたの内なる平静を見つけ、健康的なライフスタイルを始めませんか？</p>
+            <div class="hero-buttons">
+                <a href="#classes" class="btn btn-primary">無料体験を予約</a>
+                <a href="#about" class="btn btn-secondary">詳しく見る</a>
+            </div>
+        </div>
+        <div class="hero-image">
+            <div class="yoga-pose-silhouette"></div>
+        </div>
+    </section>
+
+    <!-- 特徴セクション -->
+    <section class="features">
+        <div class="container">
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3>マインドフルネス</h3>
+                    <p>日々のストレスから解放され、心の平静を取り戻しましょう</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3>体力向上</h3>
+                    <p>柔軟性と筋力を同時に鍛え、健康的な体を作りましょう</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3>コミュニティ</h3>
+                    <p>同じ目標を持つ仲間との出会いと成長の場を提供します</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2 class="section-title">Serenity Yogaについて</h2>
+                    <p class="about-description">
+                        2015年に設立されたSerenity Yogaは、すべての人が心と体のバランスを見つけられる場所を提供することを使命としています。
+                        初心者から上級者まで、それぞれのレベルに合わせたクラスをご用意しています。
+                    </p>
+                    <p class="about-description">
+                        私たちのスタジオは、自然光がたっぷりと入る明るい空間で、ヨガの練習に最適な環境を整えています。
+                        経験豊富なインストラクターが、あなたのヨガジャーニーをサポートします。
+                    </p>
+                    <div class="about-stats">
+                        <div class="stat">
+                            <h3>500+</h3>
+                            <p>満足いただいた生徒様</p>
+                        </div>
+                        <div class="stat">
+                            <h3>10年</h3>
+                            <p>の実績と経験</p>
+                        </div>
+                        <div class="stat">
+                            <h3>15</h3>
+                            <p>種類のクラス</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-image">
+                    <div class="image-placeholder">
+                        <i class="fas fa-spa"></i>
+                        <p>スタジオの雰囲気</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- クラスセクション -->
+    <section id="classes" class="classes">
+        <div class="container">
+            <h2 class="section-title">人気のクラス</h2>
+            <div class="classes-grid">
+                <div class="class-card">
+                    <div class="class-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <h3>ハタヨガ</h3>
+                    <p class="class-level">初心者〜中級者</p>
+                    <p class="class-description">基本的なポーズと呼吸法を学ぶ、ヨガの基礎クラスです。</p>
+                    <div class="class-schedule">
+                        <i class="fas fa-clock"></i>
+                        <span>月・水・金 10:00-11:00</span>
+                    </div>
+                    <button class="btn btn-primary book-class-btn" data-class="hatha" data-schedule="月・水・金 10:00-11:00">
+                        <i class="fas fa-calendar-plus"></i> 予約する
+                    </button>
+                </div>
+                <div class="class-card">
+                    <div class="class-icon">
+                        <i class="fas fa-fire"></i>
+                    </div>
+                    <h3>パワーヨガ</h3>
+                    <p class="class-level">中級者〜上級者</p>
+                    <p class="class-description">動的なポーズで体力とバランス力を向上させるクラスです。</p>
+                    <div class="class-schedule">
+                        <i class="fas fa-clock"></i>
+                        <span>火・木・土 19:00-20:00</span>
+                    </div>
+                    <button class="btn btn-primary book-class-btn" data-class="power" data-schedule="火・木・土 19:00-20:00">
+                        <i class="fas fa-calendar-plus"></i> 予約する
+                    </button>
+                </div>
+                <div class="class-card">
+                    <div class="class-icon">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <h3>リストラティブヨガ</h3>
+                    <p class="class-level">すべてのレベル</p>
+                    <p class="class-description">深いリラクゼーションとストレス解消に焦点を当てたクラスです。</p>
+                    <div class="class-schedule">
+                        <i class="fas fa-clock"></i>
+                        <span>日 17:00-18:30</span>
+                    </div>
+                    <button class="btn btn-primary book-class-btn" data-class="restorative" data-schedule="日 17:00-18:30">
+                        <i class="fas fa-calendar-plus"></i> 予約する
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- インストラクターセクション -->
+    <section id="instructors" class="instructors">
+        <div class="container">
+            <h2 class="section-title">経験豊富なインストラクター</h2>
+            <div class="instructors-grid">
+                <div class="instructor-card">
+                    <div class="instructor-image">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h3>田中 美咲</h3>
+                    <p class="instructor-title">リードインストラクター</p>
+                    <p class="instructor-bio">15年以上のヨガ指導経験を持つ認定インストラクター。ハタヨガとヴィンヤサフローを専門としています。</p>
+                    <div class="instructor-certifications">
+                        <span>RYT-500認定</span>
+                        <span>アーユルヴェーダアドバイザー</span>
+                    </div>
+                </div>
+                <div class="instructor-card">
+                    <div class="instructor-image">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h3>佐藤 健太</h3>
+                    <p class="instructor-title">パワーヨガ専門</p>
+                    <p class="instructor-bio">アスリート出身のインストラクター。体力向上とパフォーマンス向上を目的としたヨガを指導しています。</p>
+                    <div class="instructor-certifications">
+                        <span>RYT-200認定</span>
+                        <span>アナトミー指導者</span>
+                    </div>
+                </div>
+                <div class="instructor-card">
+                    <div class="instructor-image">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <h3>山田 りえ</h3>
+                    <p class="instructor-title">リストラティブヨガ専門</p>
+                    <p class="instructor-bio">瞑想とマインドフルネスの専門家。心の平静とストレス軽減に特化したクラスを提供しています。</p>
+                    <div class="instructor-certifications">
+                        <span>RYT-200認定</span>
+                        <span>瞑想指導者資格</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 料金セクション -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2 class="section-title">料金プラン</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>ドロップイン</h3>
+                    <div class="price">
+                        <span class="currency">¥</span>
+                        <span class="amount">3,000</span>
+                        <span class="period">/ 1回</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i>どのクラスでも利用可能</li>
+                        <li><i class="fas fa-check"></i>予約不要</li>
+                        <li><i class="fas fa-check"></i>初回体験割引あり</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline">詳細を見る</a>
+                </div>
+                <div class="pricing-card featured">
+                    <div class="featured-badge">人気</div>
+                    <h3>月額メンバーシップ</h3>
+                    <div class="price">
+                        <span class="currency">¥</span>
+                        <span class="amount">12,000</span>
+                        <span class="period">/ 月</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i>無制限クラス参加</li>
+                        <li><i class="fas fa-check"></i>優先予約</li>
+                        <li><i class="fas fa-check"></i>ワークショップ割引</li>
+                        <li><i class="fas fa-check"></i>パーソナル指導1回付き</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-primary">今すぐ始める</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>4回券</h3>
+                    <div class="price">
+                        <span class="currency">¥</span>
+                        <span class="amount">10,000</span>
+                        <span class="period">/ 4回</span>
+                    </div>
+                    <ul class="pricing-features">
+                        <li><i class="fas fa-check"></i>2ヶ月有効</li>
+                        <li><i class="fas fa-check"></i>家族・友人と共有可能</li>
+                        <li><i class="fas fa-check"></i>オンラインクラス対応</li>
+                    </ul>
+                    <a href="#contact" class="btn btn-outline">詳細を見る</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- お客様の声セクション -->
+    <section class="testimonials">
+        <div class="container">
+            <h2 class="section-title">お客様の声</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"ヨガを始めて3ヶ月で、肩こりが大幅に改善されました。インストラクターの皆さんがとても親切で、初心者の私でも安心して続けられています。"</p>
+                        <div class="testimonial-author">
+                            <h4>M.K さん (30代女性)</h4>
+                            <span>会社員</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"パワーヨガクラスで体力が向上し、日常生活が楽になりました。スタジオの雰囲気も素晴らしく、毎回通うのが楽しみです。"</p>
+                        <div class="testimonial-author">
+                            <h4>T.S さん (40代男性)</h4>
+                            <span>エンジニア</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="stars">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <p>"リストラティブヨガで深いリラクゼーションを体験でき、ストレスが大幅に軽減されました。心身ともに健康になれる場所です。"</p>
+                        <div class="testimonial-author">
+                            <h4>A.Y さん (50代女性)</h4>
+                            <span>主婦</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- お問い合わせセクション -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">お問い合わせ・無料体験予約</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>スタジオ情報</h3>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h4>住所</h4>
+                            <p>東京都渋谷区代官山町1-2-3<br>代官山ビル 3F</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>電話番号</h4>
+                            <p>03-1234-5678</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>メール</h4>
+                            <p>info@serenityyoga.jp</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>営業時間</h4>
+                            <p>月〜金: 6:00 - 22:00<br>土日: 7:00 - 20:00</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <label for="name">お名前</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">メールアドレス</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">電話番号</label>
+                            <input type="tel" id="phone" name="phone">
+                        </div>
+                        <div class="form-group">
+                            <label for="interest">ご興味のあるクラス</label>
+                            <select id="interest" name="interest">
+                                <option value="">選択してください</option>
+                                <option value="hatha">ハタヨガ</option>
+                                <option value="power">パワーヨガ</option>
+                                <option value="restorative">リストラティブヨガ</option>
+                                <option value="all">すべてのクラス</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">メッセージ・ご質問</label>
+                            <textarea id="message" name="message" rows="5"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-full">送信する</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Serenity Yoga Studio</h3>
+                    <p>心と体のバランスを整え、健康的なライフスタイルをサポートします。</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>クラス</h4>
+                    <ul>
+                        <li><a href="#classes">ハタヨガ</a></li>
+                        <li><a href="#classes">パワーヨガ</a></li>
+                        <li><a href="#classes">リストラティブヨガ</a></li>
+                        <li><a href="#classes">プライベートレッスン</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>サービス</h4>
+                    <ul>
+                        <li><a href="#pricing">料金プラン</a></li>
+                        <li><a href="#instructors">インストラクター</a></li>
+                        <li><a href="#contact">無料体験</a></li>
+                        <li><a href="#contact">お問い合わせ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>アクセス</h4>
+                    <p>東京都渋谷区代官山町1-2-3<br>代官山ビル 3F</p>
+                    <p>TEL: 03-1234-5678</p>
+                    <p>Email: info@serenityyoga.jp</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Serenity Yoga Studio. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- 予約モーダル -->
+    <div id="bookingModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>レッスン予約</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="bookingForm">
+                    <div class="booking-info">
+                        <h4 id="selectedClass">選択されたクラス</h4>
+                        <p id="selectedSchedule">スケジュール</p>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bookingDate">希望日</label>
+                        <input type="date" id="bookingDate" name="bookingDate" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bookingName">お名前</label>
+                        <input type="text" id="bookingName" name="bookingName" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bookingEmail">メールアドレス</label>
+                        <input type="email" id="bookingEmail" name="bookingEmail" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bookingPhone">電話番号</label>
+                        <input type="tel" id="bookingPhone" name="bookingPhone" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bookingNotes">備考・特記事項</label>
+                        <textarea id="bookingNotes" name="bookingNotes" rows="3" placeholder="初回参加、怪我の有無など"></textarea>
+                    </div>
+                    
+                    <div class="modal-buttons">
+                        <button type="button" class="btn btn-secondary cancel-booking">キャンセル</button>
+                        <button type="submit" class="btn btn-primary">予約を確定する</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 予約確認モーダル -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>予約確認</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="confirmation-success">
+                    <i class="fas fa-check-circle"></i>
+                    <h4>予約が完了しました！</h4>
+                    <div id="confirmationDetails"></div>
+                    <p class="confirmation-note">
+                        予約確認メールを送信いたしました。<br>
+                        ご不明点がございましたら、お気軽にお問い合わせください。
+                    </p>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="btn btn-primary close-confirmation">閉じる</button>
+                    <button type="button" class="btn btn-secondary view-reservations">予約一覧を見る</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 予約一覧モーダル -->
+    <div id="reservationsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>あなたの予約一覧</h3>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="reservations-search">
+                    <div class="form-group">
+                        <label for="searchEmail">メールアドレスで検索</label>
+                        <div class="search-input">
+                            <input type="email" id="searchEmail" placeholder="予約時のメールアドレスを入力">
+                            <button type="button" class="btn btn-primary search-reservations">
+                                <i class="fas fa-search"></i> 検索
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div id="reservationsList"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
