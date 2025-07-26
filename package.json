@@ -1,0 +1,46 @@
+{
+  "name": "serenity-yoga-studio",
+  "version": "1.0.0",
+  "description": "ヨガ教室のランディングページ - 予約システム付き",
+  "main": "index.html",
+  "scripts": {
+    "build": "echo 'No build process needed for static HTML/CSS/JS files'",
+    "build:azure": "echo 'Static files ready for deployment'",
+    "dev": "npx swa start",
+    "start": "npx swa start . --host 0.0.0.0 --port 4280",
+    "deploy": "npx swa deploy --env production",
+    "optimize": "npm run minify-html && npm run minify-css && npm run minify-js",
+    "minify-html": "html-minifier-terser --input-dir . --output-dir ./dist --file-ext html --remove-comments --collapse-whitespace --minify-css --minify-js --case-sensitive",
+    "minify-css": "cleancss -o ./dist/styles.css styles.css",
+    "minify-js": "terser script.js -o ./dist/script.js --compress --mangle --source-map",
+    "copy-files": "cp *.html ./dist/ && cp staticwebapp.config.json ./dist/",
+    "clean": "rm -rf dist build"
+  },
+  "keywords": [
+    "yoga",
+    "studio",
+    "wellness",
+    "reservation",
+    "static-web-app",
+    "azure"
+  ],
+  "author": "Serenity Yoga Studio",
+  "license": "MIT",
+  "devDependencies": {
+    "@azure/static-web-apps-cli": "^1.1.7",
+    "html-minifier-terser": "^7.2.0",
+    "clean-css-cli": "^5.6.2",
+    "terser": "^5.24.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yourusername/serenity-yoga-studio.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/serenity-yoga-studio/issues"
+  },
+  "homepage": "https://github.com/yourusername/serenity-yoga-studio#readme"
+}

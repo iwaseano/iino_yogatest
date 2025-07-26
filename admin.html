@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理者ページ - Serenity Yoga Studio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .admin-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        .admin-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+        
+        .admin-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        
+        .admin-actions {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .action-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+        
+        .reservations-table {
+            background: white;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+        
+        .table-header {
+            background: var(--light-gray);
+            padding: 1rem;
+            font-weight: bold;
+        }
+        
+        .table-content {
+            max-height: 500px;
+            overflow-y: auto;
+        }
+        
+        .reservation-row {
+            padding: 1rem;
+            border-bottom: 1px solid #e0e0e0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .reservation-row:hover {
+            background: var(--light-gray);
+        }
+        
+        .status-badge {
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            text-align: center;
+        }
+        
+        .password-prompt {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        
+        .password-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            min-width: 300px;
+        }
+    </style>
+</head>
+<body>
+    <!-- パスワード認証 -->
+    <div id="passwordPrompt" class="password-prompt">
+        <div class="password-form">
+            <h3>管理者認証</h3>
+            <p>管理者パスワードを入力してください</p>
+            <input type="password" id="adminPassword" placeholder="パスワード" style="width: 100%; padding: 0.8rem; margin: 1rem 0; border: 1px solid #ccc; border-radius: 5px;">
+            <div>
+                <button onclick="checkPassword()" class="btn btn-primary">ログイン</button>
+                <button onclick="window.location.href='index.html'" class="btn btn-secondary">戻る</button>
+            </div>
+            <p style="font-size: 0.8rem; color: #666; margin-top: 1rem;">
+                デモ用パスワード: admin123
+            </p>
+        </div>
+    </div>
+
+    <!-- 管理者メインコンテンツ -->
+    <div id="adminContent" style="display: none;">
+        <div class="admin-container">
+            <div class="admin-header">
+                <h1><i class="fas fa-cog"></i> Serenity Yoga Studio - 管理者ページ</h1>
+                <p>予約管理システム</p>
+            </div>
+
+            <!-- 統計 -->
+            <div class="admin-stats">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalReservations">0</div>
+                    <div>総予約数</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="todayReservations">0</div>
+                    <div>今日の予約</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="thisWeekReservations">0</div>
+                    <div>今週の予約</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="confirmedReservations">0</div>
+                    <div>確定予約</div>
+                </div>
+            </div>
+
+            <!-- 管理アクション -->
+            <div class="admin-actions">
+                <div class="action-card">
+                    <h3><i class="fas fa-download"></i> データエクスポート</h3>
+                    <p>予約データをCSVファイルでダウンロード</p>
+                    <button onclick="exportData()" class="btn btn-primary">CSVダウンロード</button>
+                </div>
+                
+                <div class="action-card">
+                    <h3><i class="fas fa-sync"></i> データ更新</h3>
+                    <p>予約データを最新の状態に更新</p>
+                    <button onclick="refreshData()" class="btn btn-secondary">データ更新</button>
+                </div>
+                
+                <div class="action-card">
+                    <h3><i class="fas fa-trash"></i> データクリア</h3>
+                    <p>すべての予約データを削除（注意）</p>
+                    <button onclick="clearAllData()" class="btn btn-outline" style="color: #d32f2f; border-color: #d32f2f;">全削除</button>
+                </div>
+                
+                <div class="action-card">
+                    <h3><i class="fas fa-plus"></i> テストデータ</h3>
+                    <p>デモ用のサンプル予約を作成</p>
+                    <button onclick="generateSampleData()" class="btn btn-secondary">サンプル作成</button>
+                </div>
+            </div>
+
+            <!-- 予約一覧 -->
+            <div class="reservations-table">
+                <div class="table-header">
+                    <h3><i class="fas fa-calendar"></i> 予約一覧</h3>
+                </div>
+                <div class="table-content" id="reservationsTableContent">
+                    <!-- 予約データがここに表示されます -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // 管理者認証
+        function checkPassword() {
+            const password = document.getElementById('adminPassword').value;
+            if (password === 'admin123') {
+                document.getElementById('passwordPrompt').style.display = 'none';
+                document.getElementById('adminContent').style.display = 'block';
+                loadAdminData();
+            } else {
+                alert('パスワードが正しくありません');
+                document.getElementById('adminPassword').value = '';
+            }
+        }
+
+        // Enter キーでログイン
+        document.getElementById('adminPassword').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                checkPassword();
+            }
+        });
+
+        // 管理者データの読み込み
+        function loadAdminData() {
+            if (typeof reservationManager === 'undefined') {
+                // ReservationManager が読み込まれていない場合の代替
+                window.reservationManager = {
+                    getReservations: () => {
+                        const stored = localStorage.getItem('yoga_reservations');
+                        return stored ? JSON.parse(stored) : [];
+                    },
+                    exportReservations: () => exportData(),
+                    clearAllReservations: () => clearAllData()
+                };
+            }
+            
+            updateStats();
+            displayReservationsTable();
+        }
+
+        // 統計更新
+        function updateStats() {
+            const reservations = reservationManager.getReservations();
+            const now = new Date();
+            const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+            
+            // 今週の開始日を計算
+            const startOfWeek = new Date(today);
+            startOfWeek.setDate(today.getDate() - today.getDay());
+
+            document.getElementById('totalReservations').textContent = reservations.length;
+            
+            document.getElementById('todayReservations').textContent = reservations.filter(r => {
+                const reservationDate = new Date(r.date);
+                return reservationDate.toDateString() === today.toDateString();
+            }).length;
+            
+            document.getElementById('thisWeekReservations').textContent = reservations.filter(r => {
+                const reservationDate = new Date(r.date);
+                return reservationDate >= startOfWeek && reservationDate < new Date(startOfWeek.getTime() + 7 * 24 * 60 * 60 * 1000);
+            }).length;
+            
+            document.getElementById('confirmedReservations').textContent = reservations.filter(r => 
+                r.status === 'confirmed'
+            ).length;
+        }
+
+        // 予約テーブル表示
+        function displayReservationsTable() {
+            const reservations = reservationManager.getReservations();
+            const container = document.getElementById('reservationsTableContent');
+            
+            if (reservations.length === 0) {
+                container.innerHTML = '<div style="padding: 2rem; text-align: center; color: #666;">予約データがありません</div>';
+                return;
+            }
+
+            const classNames = {
+                'hatha': 'ハタヨガ',
+                'power': 'パワーヨガ',
+                'restorative': 'リストラティブヨガ'
+            };
+
+            container.innerHTML = reservations
+                .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+                .map(reservation => `
+                    <div class="reservation-row">
+                        <div><strong>${reservation.id}</strong></div>
+                        <div>${classNames[reservation.class] || reservation.class}</div>
+                        <div>${formatDate(reservation.date)}</div>
+                        <div>${reservation.name}</div>
+                        <div>${reservation.email}</div>
+                        <div>${reservation.phone}</div>
+                        <div>
+                            <span class="status-badge status-${reservation.status}">
+                                ${reservation.status === 'confirmed' ? '確定' : 'キャンセル'}
+                            </span>
+                        </div>
+                        <div style="font-size: 0.8rem;">${formatDateTime(reservation.createdAt)}</div>
+                    </div>
+                `).join('');
+        }
+
+        // データエクスポート
+        function exportData() {
+            if (reservationManager && reservationManager.exportReservations) {
+                reservationManager.exportReservations();
+            } else {
+                alert('エクスポート機能の準備中です');
+            }
+        }
+
+        // データ更新
+        function refreshData() {
+            loadAdminData();
+            alert('データを更新しました');
+        }
+
+        // 全データクリア
+        function clearAllData() {
+            if (confirm('本当にすべての予約データを削除しますか？\nこの操作は取り消すことができません。')) {
+                if (reservationManager && reservationManager.clearAllReservations) {
+                    reservationManager.clearAllReservations();
+                    loadAdminData();
+                } else {
+                    localStorage.removeItem('yoga_reservations');
+                    alert('すべてのデータが削除されました');
+                    loadAdminData();
+                }
+            }
+        }
+
+        // サンプルデータ生成
+        function generateSampleData() {
+            const sampleReservations = [
+                {
+                    id: 'BK' + Date.now() + 'DEMO1',
+                    class: 'hatha',
+                    schedule: '月・水・金 10:00-11:00',
+                    date: '2025-07-28',
+                    name: '田中 花子',
+                    email: 'hanako@example.com',
+                    phone: '090-1234-5678',
+                    notes: '初回参加です',
+                    status: 'confirmed',
+                    createdAt: new Date().toISOString()
+                },
+                {
+                    id: 'BK' + (Date.now() + 1) + 'DEMO2',
+                    class: 'power',
+                    schedule: '火・木・土 19:00-20:00',
+                    date: '2025-07-29',
+                    name: '佐藤 太郎',
+                    email: 'taro@example.com',
+                    phone: '080-9876-5432',
+                    notes: '',
+                    status: 'confirmed',
+                    createdAt: new Date().toISOString()
+                },
+                {
+                    id: 'BK' + (Date.now() + 2) + 'DEMO3',
+                    class: 'restorative',
+                    schedule: '日 17:00-18:30',
+                    date: '2025-07-27',
+                    name: '山田 美咲',
+                    email: 'misaki@example.com',
+                    phone: '070-1111-2222',
+                    notes: 'リラックス重視でお願いします',
+                    status: 'cancelled',
+                    createdAt: new Date(Date.now() - 86400000).toISOString() // 1日前
+                }
+            ];
+
+            const existingReservations = reservationManager.getReservations();
+            const allReservations = [...existingReservations, ...sampleReservations];
+            localStorage.setItem('yoga_reservations', JSON.stringify(allReservations));
+            
+            loadAdminData();
+            alert('サンプルデータを追加しました');
+        }
+
+        // 日付フォーマット関数
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('ja-JP');
+        }
+
+        function formatDateTime(dateTimeString) {
+            const date = new Date(dateTimeString);
+            return date.toLocaleDateString('ja-JP', {
+                month: 'numeric',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            });
+        }
+
+        // ページ読み込み時の処理
+        document.addEventListener('DOMContentLoaded', function() {
+            // 開発中は自動ログイン（本番では削除）
+            // checkPassword();
+        });
+    </script>
+</body>
+</html>
