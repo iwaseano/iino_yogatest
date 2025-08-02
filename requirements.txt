@@ -1,0 +1,2 @@
+# Root level requirements.txt for Azure Static Web Apps build process
+# Actual API dependencies are in ./api/requirements.txt

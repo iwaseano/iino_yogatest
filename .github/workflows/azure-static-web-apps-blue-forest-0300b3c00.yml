@@ -24,9 +24,19 @@ jobs:
         with:
           node-version: '18'
           
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          
       - name: Install dependencies (optional)
         run: |
           npm install
+          
+      - name: Install API dependencies
+        run: |
+          cd api
+          pip install -r requirements.txt
           
       - name: Build And Deploy
         id: builddeploy
@@ -38,6 +48,7 @@ jobs:
           app_location: "./src"
           api_location: "./api"
           output_location: ""
+          skip_api_build: true
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
